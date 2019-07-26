@@ -12,7 +12,7 @@ export default function TodoList() {
     const dispatch = useDispatch();
 
     const handleChange = (id) => dispatch(actions.Todo.toggle(id));
-
+  const handleDelete=(id)=>dispatch(actions.Todo.deleteTodo(id));
 
     return (
         <ul className="todo-list">
@@ -21,8 +21,10 @@ export default function TodoList() {
                     <div className="view">
                         <input className="toggle" type="checkbox"  checked={todo.done}
                          onChange={() => handleChange(todo.id)}
-                        />
+                        />                  
                         <label>{todo.title}</label>
+
+                        <button onClick={() => handleDelete(todo.id)}>Delete</button> 
                     </div>
                 </li>
             )}

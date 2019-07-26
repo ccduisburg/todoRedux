@@ -20,15 +20,18 @@ const initialState = {
 // Action types
 const ADD_TODO = 'todo/Todo/ADD';
 const TOGGLE = 'todo/Todo/TOGGLE';
+const DELETETODO = 'todo/Todo/DELETE';
 export const actionTypes = {
     ADD_TODO,
-    TOGGLE
+    TOGGLE,
+    DELETETODO
 };
 
 // Actions
 export const actions = {
     addTodo: createAction(ADD_TODO, title => ({title})),
     toggle: createAction(TOGGLE, id => ({id})),
+    deleteTodo:createAction(DELETETODO, id => ({id})),
 };
 
 // Reducers
@@ -60,6 +63,13 @@ export const reducers = handleActions({
                   todos: tmp
               }     
           },        
+
+          [DELETETODO]:(state,action)=>{
+           let tmp=state.todos.filter(one=> one.id !== action.payload.id);
+           return {
+               todos: tmp
+           }
+          }
     
 }, initialState);
 
