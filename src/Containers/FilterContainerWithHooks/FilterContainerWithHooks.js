@@ -12,6 +12,7 @@ function FilterContainerWithHooks() {
     const dispatch = useDispatch();
     const onShowAllClick = () => dispatch(actions.Filter.filterShowAll());
     const onShowOpenClick = () => dispatch(actions.Filter.filterShowOpen());
+    const onShowClosedClick = () => dispatch(actions.Filter.filterShowClosed());
 
     return (
         <ul className="filters">
@@ -25,6 +26,12 @@ function FilterContainerWithHooks() {
                 {showAll ?
                     <button onClick={onShowOpenClick}>Open</button> :
                     <span>Open</span>
+                }
+            </li>
+            <li>
+                {showAll ?
+                    <button onClick={onShowClosedClick}>Closed</button> :
+                    <span>Closed</span>
                 }
             </li>
         </ul>
