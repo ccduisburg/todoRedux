@@ -2,7 +2,9 @@ import {createAction, handleActions} from 'redux-actions';
 
 // Initial State
 const initialState = {
-    showAll: false
+    showAll: true,
+    showOpen: false,
+    showClosed: false
 };
 
 // Action types
@@ -24,14 +26,18 @@ export const actions = {
 
 // Reducers
 export const reducers = handleActions({
-    [FILTER_SHOW_ALL]: (state, action) => ({...state, showAll: true }),
-    [FILTER_SHOW_OPEN]: (state, action) => ({...state, showAll: false }),
-    [FILTER_SHOW_CLOSED]: (state, action) => ({...state, showAll: false })
+    [FILTER_SHOW_ALL]: (state, action) => ({...state, showAll: true, showOpen: false, showClosed: false }),
+    [FILTER_SHOW_OPEN]: (state, action) => ({...state, showAll: false, showOpen: true, showClosed: false }),
+    [FILTER_SHOW_CLOSED]: (state, action) => ({...state, showAll: false, showOpen: false, showClosed: true })
 }, initialState);
 
 // Selectors
 const showAll = state => state.Filter.showAll;
+const showClosed = state => state.Filter.showClosed;
+const showOpen = state => state.Filter.showOpen;
 
 export const selectors = {
-    showAll
+    showAll,
+    showClosed,
+    showOpen
 };

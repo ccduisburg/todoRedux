@@ -76,14 +76,14 @@ export const reducers = handleActions({
 // Selectors
 const allTodos = state => state.Todo.todos;
 const openTodos = state => state.Todo.todos.filter(todo => !todo.done);
+const closeTodos = state => state.Todo.todos.filter(todo => todo.done);
 const visibleTodos = state => {
     return filterSelectors.showAll(state) ?
-        allTodos(state) :
-        openTodos(state)
+        allTodos(state) : filterSelectors.showOpen(state)? openTodos(state):
+        closeTodos(state)
+     
 }
 
 export const selectors = {
-    allTodos,
-    openTodos,
     visibleTodos
 };

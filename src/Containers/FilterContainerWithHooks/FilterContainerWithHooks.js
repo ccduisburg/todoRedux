@@ -9,6 +9,8 @@ import {useSelector, useDispatch} from 'react-redux';
  */
 function FilterContainerWithHooks() {
     const showAll = useSelector(selectors.Filter.showAll);
+    const showOpen = useSelector(selectors.Filter.showOpen);
+    const showClosed = useSelector(selectors.Filter.showClosed);
     const dispatch = useDispatch();
     const onShowAllClick = () => dispatch(actions.Filter.filterShowAll());
     const onShowOpenClick = () => dispatch(actions.Filter.filterShowOpen());
@@ -17,19 +19,19 @@ function FilterContainerWithHooks() {
     return (
         <ul className="filters">
             <li>
-                {showAll ?
-                    <span>All</span> :
-                    <button onClick={onShowAllClick}>All</button>
+                {!showAll ?
+                    <button onClick={onShowAllClick}>All</button>:
+                    <span>All</span>
                 }
             </li>
             <li>
-                {showAll ?
+                {!showOpen ?
                     <button onClick={onShowOpenClick}>Open</button> :
                     <span>Open</span>
                 }
             </li>
             <li>
-                {showAll ?
+                {!showClosed ?
                     <button onClick={onShowClosedClick}>Closed</button> :
                     <span>Closed</span>
                 }

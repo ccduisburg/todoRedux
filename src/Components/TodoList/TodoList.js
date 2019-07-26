@@ -5,15 +5,12 @@ import './TodoList.css';
 
 export default function TodoList() {
     const visibleTodos = useSelector(selectors.Todo.visibleTodos);
-    // not needed anymore
-    const openTodos = useSelector(selectors.Todo.openTodos);
-    const showAll = useSelector(selectors.Filter.showAll);
-    // const todosToShow = showAll ? allTodos : openTodos;
+
 
     const dispatch = useDispatch();
 
     const handleChange = (id) => dispatch(actions.Todo.toggle(id));
-  const handleDelete=(id)=>dispatch(actions.Todo.deleteTodo(id));
+    const handleDelete=(id)=>dispatch(actions.Todo.deleteTodo(id));
 
     return (
         <ul className="todo-list">

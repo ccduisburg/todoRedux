@@ -4,12 +4,15 @@ import {selectors, actions} from '../../Redux/index';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => ({
-    showAll: selectors.Filter.showAll(state)
+    showAll: selectors.Filter.showAll(state),
+    showClosed: selectors.Filter.showClosed(state),
+    showOpen: selectors.Filter.showOpen(state)
 });
 
 const mapDispatchToProps = dispatch => ({
     onShowAllClick: () => dispatch(actions.Filter.filterShowAll()),
     onShowOpenClick: () => dispatch(actions.Filter.filterShowOpen()),
+    onShowClosedClick: () => dispatch(actions.Filter.filterShowClosed()),
 });
 
 class FilterContainer extends React.PureComponent {
@@ -19,6 +22,7 @@ class FilterContainer extends React.PureComponent {
         // dispatch
         onShowAllClick: PropTypes.func.isRequired,
         onShowOpenClick: PropTypes.func.isRequired,
+        onShowClosedClick: PropTypes.func.isRequired,
     };
 
     render() {
@@ -31,9 +35,15 @@ class FilterContainer extends React.PureComponent {
                     }
                 </li>
                 <li>
-                    {this.props.showAll ?
+                    {this.props.showOpen ?
                         <button onClick={this.props.onShowOpenClick}>Open</button> :
                         <span>Open</span>
+                    }
+                </li>
+                <li>
+                    {this.props.showClosed ?
+                        <button onClick={this.props.onShowClosedClick}>Closed</button> :
+                        <span>closed</span>
                     }
                 </li>
             </ul>
