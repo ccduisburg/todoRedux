@@ -1,20 +1,32 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent,useState } from 'react';
 import PropTypes from 'prop-types';
 import './Header.css';
+import {actions} from '../../Redux/index';
+import {useDispatch} from 'react-redux';
 
-export default class Header extends PureComponent {
-    static propTypes = {
-        title: PropTypes.string.isRequired,
-        // ...
-    };
-
-    render() {
-        return (
-            <header className="header">
-                <h1>{this.props.title}</h1>
-                <input class="new-todo"
-                   placeholder="What needs to be done?" />
-            </header>
-        );
-    }
+function Header(props) {
+    const [title,setTitle]=useState("");
+    const dispatch = useDispatch();
+    const hanleInput=()=>{        
+        dispatch(actions.Todo.addTodo(title))
+        setTitle("")
+    
+    };   
+    return (
+        <header className="header">
+            <h1>{props.title}</h1>
+            <form onSubmit={(e)=>{
+                e.preventDefault();                
+                hanleInput()}}>
+            <input type="text"
+                value={title}
+                className="new-todo"
+                placeholder="What needs to be done?"               
+                onChange={(e)=>setTitle(e.target.value)}
+                
+            />
+            </form>
+        </header>
+    );
 }
+export default Header;
