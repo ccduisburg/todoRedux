@@ -1,6 +1,7 @@
 import React from 'react';
 import {selectors, actions} from '../../Redux/index';
 import {useSelector, useDispatch} from 'react-redux';
+import './TodoList.css';
 
 export default function TodoList() {
     const visibleTodos = useSelector(selectors.Todo.visibleTodos);
@@ -24,7 +25,7 @@ export default function TodoList() {
                         />                  
                         <label>{todo.title}</label>
 
-                        <button onClick={() => handleDelete(todo.id)}>Delete</button> 
+                        <button className="btn-delete" onClick={() => handleDelete(todo.id)}>Delete</button> 
                     </div>
                 </li>
             )}
